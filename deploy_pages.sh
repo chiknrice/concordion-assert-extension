@@ -10,14 +10,14 @@ cd gh-pages
 
 git clone --depth=50 --branch=gh-pages https://$GH_TOKEN@github.com/chiknrice/concordion-assert-extension.git
 
-if [ -v TRAVIS_TAG ]
+if [[ -n "${TRAVIS_TAG-}" ]]
 then
-    echo "Updating concordion specs for $TRAVIS_TAG"
+    echo "Adding concordion specs for $TRAVIS_TAG"
     mkdir concordion-assert-extension/$TRAVIS_TAG
     cp -R ../build/reports/spec/* concordion-assert-extension/$TRAVIS_TAG
 fi
 
-if [ -n $(git status -s) ]
+if [[ -n $(git status -s) ]]
 then
     echo "Updating latest concordion specs"
     rm -rf concordion-assert-extension/latest
