@@ -1,0 +1,26 @@
+div.source {
+    display: block;
+    position: absolute;
+    z-index: 98;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.source pre {
+    background: rgba(0, 0, 0, .8);
+    margin: 0px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: #fff;
+    white-space: pre;
+}
+
+span[data-source] {
+    font-style: italic;
+    font-weight: bold;
+}
+
+div.source span.instrument {
+    font-weight: bold;
+    color: yellow;
+}
