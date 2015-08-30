@@ -17,14 +17,18 @@ then
     cp -R ../build/reports/spec/* concordion-assert-extension/$TRAVIS_TAG
 fi
 
+rm -rf concordion-assert-extension/latest
+mkdir concordion-assert-extension/latest
+cp -R ../build/reports/spec/* concordion-assert-extension/latest
+
+cd concordion-assert-extension
+
+echo Testing git status -s
+git status -s
+
 if [[ -n $(git status -s) ]]
 then
     echo "Updating latest concordion specs"
-    rm -rf concordion-assert-extension/latest
-    mkdir concordion-assert-extension/latest
-    cp -R ../build/reports/spec/* concordion-assert-extension/latest
-
-    cd concordion-assert-extension
 
     git config user.email "chiknrice@gmail.com"
     git config user.name "Travis CI"
