@@ -23,17 +23,16 @@ cp -R ../build/reports/spec/* concordion-assert-extension/latest
 
 cd concordion-assert-extension
 
-echo Testing git status -s
-git status -s
-
+# currently always evaluates to true due to the timestamps in spec footers
 if [[ -n $(git status -s) ]]
 then
     echo "Updating latest concordion specs"
 
     git config user.email "chiknrice@gmail.com"
     git config user.name "Travis CI"
+    git config push.default matching
 
-    git add .
+    git add --all .
     git commit -m "Update concordion spec result"
 
     git push
