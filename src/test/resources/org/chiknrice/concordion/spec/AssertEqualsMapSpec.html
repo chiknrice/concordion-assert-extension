@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:c="http://www.concordion.org/2007/concordion" xmlns:i="http://www.chiknrice.org/concordion">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Assert Equals Map Command</title>
+</head>
+<body>
+
+<h1>Assert Equals Map Command</h1>
+
+<p>
+    TODO: description
+</p>
+
+<div class="example">
+
+    <p>
+        <b>Give</b> the following map <code>#{"a": "x", "b": "y", "c": "z"}</code>
+    </p>
+
+    <p>
+        <b>Then</b> a <code>table</code> instrumented with <code>i:assertEqualsMap="#{'a': 'x', 'b': 'y', 'c':
+        'z'}"</code>
+
+        <!--<span c:execute="#thMap=toMap(#{'a':'x', 'b': 'y', 'c': 'z'})"/>-->
+
+    <table i:assertEqualsMap="#{'a1':'x1', 'b1': 'surplus row', 'c1': 'z1'}">
+        <tr>
+            <th i:columnAs="key">Key</th>
+            <th i:columnAs="value">Value</th>
+        </tr>
+        <tr>
+            <td>a1</td>
+            <td>x1</td>
+        </tr>
+        <tr>
+            <td>d1</td>
+            <td>missing row</td>
+        </tr>
+        <tr>
+            <td>c1</td>
+            <td>h1</td>
+        </tr>
+    </table>
+
+    </p>
+
+</div>
+
+</body>
+</html>

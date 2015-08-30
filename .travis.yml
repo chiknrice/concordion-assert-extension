@@ -1,0 +1,22 @@
+language: java
+
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+
+branches:
+  only:
+    - master
+      # Build tags that match this regex in addition to building the master branch.
+    - /^v[0-9]+\.[0-9]+\.[0-9]+/
+
+env:
+  global://TODO: generate for assert...
+    - secure: DMaSBbUDpSahBxi9KOgdGFs1cftCpt84JXFPtAiHcffUf1c90pwGPwck8H6Dx/zQqY8SgrA/FOZsX3J6OsW4GT8DLT02lkyjMhEFS75Jx7EPxq9w+PE7LcywbnuV4Md3t/FqEdsyFdPVHir1rYhWzmeZJDBBDvqRKaqmGTFOYPx3nNcOGUB0g8/JYqlmvctcdS6vufCPzVuNbqdqMMObd6x7ntYftQ0s7AwJJfBmDWqUbc8W4hBIoVcRY4GwJsqmtQpqzG0E407WPZTsC/nirvdUvPl/Jh5dANS8nKU4khzRtHGYtFX17hQKBRbUIb0N2Lml5kRG993STe77nMSBVckLi+8XIhl+ApMnalAIitIpsI0PF5Xw4QgCyyH1z2yWX1r4D1LG34MMvv+4mMvPDPAqUCGuCgV/yuj0NB8Z2ZT9AUxKV2ZecYOrPj5Pz1pvE/GEZMo8rs5Zh6IE7vVGlBvqz13fi94hYGLuNiVqxycHiZv00DjUosj9H5+LXulNJV+zmdAB95D1XuO/L17gC/3bu8eYa3MBa3ne+/+DLnb7/5uKA5YZ0mr4uW1bqAiaXAE2pIS9fk76/buytwCu8pAAf94A6UdXzhDg4e0cC0LcbcpIUfCF3rDymeo/DQ27B+pjizmD0w60bGM7EBpwpW7kzQj9B1ISwzXI/BPAjGo=
+    - secure: VuwHvaYMgLRBBrhpzE58d5ghMUhd+GC82yZZqR6I1S5kktRhqHb1QipUJn4zGZNWfGIK/ICijiDOQB5msmiYRWURjZE0G0R/MuhIN562wD8ZGDYrE/2lNypUCs8ZeALuuMNcdQY7vXV366IpJwUvqJ38t04RFD+PYpn5dnjyQSS15rU7Z/smYSo4sMP6bDn7GxHLFbFuhmIscgsFJv+bMCiJ84F74rr4gpLY+LH53Sglt1EVZH8RkeOAnCa8Y6cDse0ZSb6e0iVerlv3LhuZEHmU0JnIDCYVVso8VrffqOzNd4FBMf7n0rxAZjLp8/y6DWaGgJXBSGhswlgyKLjwUHwPWkSfrv7ONqjjim8ZATHDjAk31W0KgfbYM0XgjRBqVJTNAJwH5qaej9Fq2olXFJd9GcP/v1DJ11//TKF0xQN4LNldQgCEtj7XKIeuluQM4Bg/lQV2vbZyXxVGtqSLtK/0MZFsNi1o9Z6+ATDVKnKUeSByCx8uSEY4ltbbehnPMxMj6dplxPSKRL4n3gIOiocpYkqhB/4vEwRA01xld7pNr6kythAMsIkCk3irG9qGRfg5YS4qFJM1EX/u0f6IxNMkcc7XrugwNyGCi16AxeL74p3wXK3Rl5r3u8tXXYHWzU2hsuJvYLAGYYSxYVehnKQsLuFOpJ/jXyevt4bfvqs=
+    - secure: EMPsLGLiaHkB5kbHCTsS4qWQSaLCo+hE85eWAxN6mbXEgtiabuKftkqTwy+C5J4XlOzra10hS7/k2xJKSzLHCUOZK61HsCYPa2MiqkbnaKLCqDuMRJ+xMfGaVfVcz/BACOEEXM/l9VhkAcHj5mDnZooB/pEOxAp14t6Y6DDR58njQ9Lrnu8/WynyMD7YczGeEFAtW/s3jzWIlET8MBkjLOf9CRQMuW8be/nhzIxKd81ZS14s5/Oark4JoInz4FnX/o7zx07luQWeM5AlkG0GmhstgcZoMIG6F1ZHpCZZd/uThoPY6qPS7zxVMI+mN9+WLHNLgjVH3OVdtNJBYZkV2dCHo++mQ0ZNcbmBJm+RH1kw6SjzyA870xErJ4aclNWHThvVL9+jVe2d4fOaCGFHSajiGX+tFd6xmc4BBvwSW08I3x1BdTwcV4h2WqMLj4CZw1+v3GWPB4/nHQI2RpEvFkqkKgGryO/x/ixszt5My3GzOG5BQ8th+WizFIkdr67RU26UuOLSybQdczuDGhIh+ikadPYI+JdkpTA3Wk3hHyaj0IhpnQcrw3GRUPf9ioxCfWsEW+zuutxrSGx5FzJGC9uYfbN7xzD0XhpgGx3Afl5Zpfsuzk6shm5wF9NkP0OQdcHcJxBn2FRBDdx+QwNGG36zrUNLvyCQ/6EicThIp1U=
+
+after_success:
+  - test "${TRAVIS_JDK_VERSION}" == "oraclejdk7" && ./gradlew jacocoTestReport coveralls
+  - test "${TRAVIS_JDK_VERSION}" == "oraclejdk7" && ./deploy_pages.sh
+  - test "${TRAVIS_TAG}" != "" && test "${TRAVIS_JDK_VERSION}" == "oraclejdk7" && ./gradlew bintrayUpload
