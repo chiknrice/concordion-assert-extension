@@ -50,19 +50,19 @@ bintray {
     publications = ['Release']
     pkg {
         repo = 'maven'
-        name = 'concordion-assert-extension'
+        name = '${project.name}'
         licenses = ['GPL-3.0']
-        vcsUrl = 'https://github.com/chiknrice/concordion-assert-extension.git'
+        vcsUrl = 'https://github.com/chiknrice/${project.name}.git'
     }
 }
 
 def pomConfig = {
     name project.name
-    url "https://github.com/chiknrice/${project.name}"
+    url 'https://github.com/chiknrice/${project.name}'
     scm {
-        url "https://github.com/chiknrice/concordion-assert-extension"
-        connection "scm:git:git@github.com:chiknrice/concordion-assert-extension.git"
-        developerConnection "scm:git:git@github.com:chiknrice/concordion-assert-extension.git"
+        url 'https://github.com/chiknrice/${project.name}'
+        connection 'scm:git:git@github.com:chiknrice/${project.name}.git'
+        developerConnection 'scm:git:git@github.com:chiknrice/${project.name}.git'
     }
     licenses {
         license {
@@ -90,7 +90,7 @@ publishing {
             artifact javadocJar
 
             pom.withXml {
-                asNode().appendNode("description", project.description).plus(pomConfig)
+                asNode().appendNode('description', project.description).plus(pomConfig)
             }
         }
     }
@@ -101,7 +101,7 @@ release {
 }
 
 test {
-    systemProperties['concordion.output.dir'] = "$reporting.baseDir/spec"
+    systemProperties['concordion.output.dir'] = '$reporting.baseDir/spec'
 }
 
 jacocoTestReport {
