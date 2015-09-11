@@ -50,19 +50,19 @@ bintray {
     publications = ['Release']
     pkg {
         repo = 'maven'
-        name = '${project.name}'
+        name = "$project.name"
         licenses = ['GPL-3.0']
-        vcsUrl = 'https://github.com/chiknrice/${project.name}.git'
+        vcsUrl = "https://github.com/chiknrice/${project.name}.git"
     }
 }
 
 def pomConfig = {
     name project.name
-    url 'https://github.com/chiknrice/${project.name}'
+    url "https://github.com/chiknrice/$project.name"
     scm {
-        url 'https://github.com/chiknrice/${project.name}'
-        connection 'scm:git:git@github.com:chiknrice/${project.name}.git'
-        developerConnection 'scm:git:git@github.com:chiknrice/${project.name}.git'
+        url "https://github.com/chiknrice/$project.name"
+        connection "scm:git:git@github.com:chiknrice/${project.name}.git"
+        developerConnection "scm:git:git@github.com:chiknrice/${project.name}.git"
     }
     licenses {
         license {
@@ -97,11 +97,11 @@ publishing {
 }
 
 release {
-    tagTemplate = 'v${version}'
+    tagTemplate = "v$version"
 }
 
 test {
-    systemProperties['concordion.output.dir'] = '$reporting.baseDir/spec'
+    systemProperties['concordion.output.dir'] = "$reporting.baseDir/spec"
 }
 
 jacocoTestReport {
